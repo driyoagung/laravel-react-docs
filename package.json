@@ -1,0 +1,29 @@
+{
+  "name": "ebook-docs-monorepo",
+  "version": "1.0.0",
+  "description": "Monorepo untuk dokumentasi ebook (Laravel, React, Vue, dll) dalam Bahasa Indonesia",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "docs/laravel",
+    "docs/react"
+  ],
+  "scripts": {
+    "dev:laravel": "npm run dev --workspace=laravel-docs",
+    "dev:react": "npm run dev --workspace=react-docs",
+    "build:laravel": "npm run build --workspace=laravel-docs",
+    "build:react": "npm run build --workspace=react-docs",
+    "build:all": "npm run build --workspaces --if-present",
+    "preview:laravel": "npm run preview --workspace=laravel-docs",
+    "preview:react": "npm run preview --workspace=react-docs",
+    "clean": "rimraf \"docs/*/.vitepress/dist\" \"docs/*/.vitepress/cache\""
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "vitepress": "^1.5.0",
+    "vue": "^3.4.38"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
