@@ -6,20 +6,27 @@
   "type": "module",
   "workspaces": [
     "docs/laravel",
-    "docs/react"
+    "docs/react",
+    "docs/tailwind"
   ],
   "scripts": {
     "dev:laravel": "npm run dev --workspace=laravel-docs",
     "dev:react": "npm run dev --workspace=react-docs",
+    "dev:tailwind": "npm run dev --workspace=tailwind-docs",
     "build:laravel": "npm run build --workspace=laravel-docs",
     "build:react": "npm run build --workspace=react-docs",
+    "build:tailwind": "npm run build --workspace=tailwind-docs",
     "build:all": "npm run build --workspaces --if-present",
     "preview:laravel": "npm run preview --workspace=laravel-docs",
     "preview:react": "npm run preview --workspace=react-docs",
+    "preview:tailwind": "npm run preview --workspace=tailwind-docs",
     "clean": "rimraf \"docs/*/.vitepress/dist\" \"docs/*/.vitepress/cache\""
   },
   "devDependencies": {
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.26",
     "rimraf": "^6.0.1",
+    "tailwindcss": "^3.4.17",
     "vitepress": "^1.5.0",
     "vue": "^3.4.38"
   },

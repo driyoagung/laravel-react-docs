@@ -1,0 +1,57 @@
+/* ============================================
+   Preview wrapper styles
+   ============================================ */
+
+@layer tw-base, tw-components, tw-utilities;
+
+@layer tw-base {
+  @tailwind base;
+}
+
+@layer tw-components {
+  @tailwind components;
+}
+
+@layer tw-utilities {
+  @tailwind utilities;
+}
+
+/* ============================================
+   Preview wrapper - container konsisten
+   ============================================ */
+
+@layer tw-utilities {
+  .tailwind-preview {
+    @apply my-6 rounded-lg border overflow-hidden;
+    border-color: #e5e7eb;
+  }
+  .dark .tailwind-preview {
+    border-color: #374151;
+  }
+
+  .tailwind-preview-label {
+    @apply flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider;
+    background-color: #f9fafb;
+    color: #4b5563;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .dark .tailwind-preview-label {
+    background-color: #1f2937;
+    color: #9ca3af;
+    border-color: #374151;
+  }
+
+  .tailwind-preview-content {
+    @apply p-6 min-h-[60px] flex flex-wrap items-center justify-center gap-4;
+    background-color: #fafafa;
+    color: #111827;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    position: relative;
+  }
+  .dark .tailwind-preview-content {
+    background-color: #0f172a;
+    color: #e5e7eb;
+  }
+}
