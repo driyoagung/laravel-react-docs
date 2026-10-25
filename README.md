@@ -50,6 +50,35 @@ laravel-react/
 
 ## 🚀 Quick Start
 
+### Next.js 14
+
+Dokumentasi Next.js kini tersedia sebagai situs VitePress tersendiri di `docs/nextjs`, berisi 9 bagian dan 21 bab. Dari root repository:
+
+```bash
+npm install
+npm run dev:nextjs
+```
+
+Buka alamat localhost yang ditampilkan di terminal. Untuk memeriksa hasil build:
+
+```bash
+npm run build:nextjs
+npm run preview:nextjs
+```
+
+Naskah mentah Next.js tetap tersimpan di `docs/nextjs/`; halaman situsnya ada di folder `bagian-1` sampai `bagian-9`.
+
+### Vue.js 3
+
+Dokumentasi Vue tersedia sebagai situs VitePress di `docs/vue`, berisi 7 bagian dan 24 bab. Naskah asalnya tetap ada di `docs/vue js`.
+
+```bash
+npm install
+npm run dev:vue
+```
+
+Untuk memeriksa hasil produksi, jalankan `npm run build:vue` lalu `npm run preview:vue`.
+
 ### 1. Install Dependencies (1x untuk semua workspace)
 
 ```bash
