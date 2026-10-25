@@ -167,10 +167,6 @@ export default defineConfig({
     },
   },
 
-  sitemap: {
-    hostname: 'https://laravel-docs.example.com',
-  },
-
   ignoreDeadLinks: [
     /^https?:\/\/(www\.)?example\.com/,
     /README/,

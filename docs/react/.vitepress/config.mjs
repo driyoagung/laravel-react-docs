@@ -168,10 +168,6 @@ export default defineConfig({
     },
   },
 
-  sitemap: {
-    hostname: 'https://react-docs.example.com',
-  },
-
   ignoreDeadLinks: [
     /^https?:\/\/(www\.)?example\.com/,
     /README/,

@@ -171,10 +171,6 @@ export default defineConfig({
     },
   },
 
-  sitemap: {
-    hostname: 'https://tailwind-docs.example.com',
-  },
-
   ignoreDeadLinks: [
     /^https?:\/\/(www\.)?example\.com/,
     /README/,

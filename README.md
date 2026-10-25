@@ -137,33 +137,28 @@ Output build ada di masing-masing `docs/<framework>/.vitepress/dist/`.
 
 ## 🌐 Deploy ke Vercel (Setiap Docs Site → Domain Sendiri)
 
-Setiap docs site di-deploy sebagai **Vercel project terpisah** dengan custom domain-nya sendiri.
+Gunakan **satu Vercel Project untuk setiap situs**. Kelima project terhubung ke repository Git yang sama, tetapi masing-masing memilih Root Directory sendiri. Contoh domain di bawah hanya ilustrasi; ganti `contoh.com` dengan domain yang Anda miliki.
 
-### Setup Laravel Docs
+| Vercel Project | Root Directory | Contoh domain |
+| --- | --- | --- |
+| `ebook-laravel` | `docs/laravel` | `laravel.contoh.com` |
+| `ebook-react` | `docs/react` | `react.contoh.com` |
+| `ebook-tailwind` | `docs/tailwind` | `tailwind.contoh.com` |
+| `ebook-nextjs` | `docs/nextjs` | `nextjs.contoh.com` |
+| `ebook-vue` | `docs/vue` | `vue.contoh.com` |
 
-1. Push repo ini ke GitHub
-2. Buka [vercel.com/new](https://vercel.com/new) → Import repository
-3. Set **Root Directory** ke `docs/laravel`
-4. Framework Preset otomatis terdeteksi sebagai **VitePress**
-5. Klik **Deploy**
-6. Setelah deploy sukses, buka **Settings → Domains**
-7. Tambahkan custom domain (misal `laravel-docs.example.com`)
-8. Ikuti instruksi DNS verification
+Untuk **setiap baris** tabel:
 
-### Setup React Docs (Nanti)
+1. Push repository ke GitHub, GitLab, atau Bitbucket.
+2. Di [Vercel Dashboard](https://vercel.com/new), buat **Add New → Project**, lalu impor repository yang sama.
+3. Sebelum deploy, ubah **Root Directory** sesuai tabel. Jangan gunakan root repository untuk salah satu situs docs.
+4. Periksa konfigurasi build: **Framework Preset** `VitePress`, **Build Command** `npm run build`, dan **Output Directory** `.vitepress/dist`. Nilai ini juga tersimpan di `vercel.json` pada tiap folder docs.
+5. Deploy. Setelah situs tampil pada alamat sementara `*.vercel.app`, buka **Project Settings → Domains** dan tambahkan domain untuk project tersebut.
+6. Tambahkan record DNS yang ditampilkan Vercel pada penyedia domain Anda. Untuk subdomain biasanya berupa CNAME; salin nilai yang diberikan Vercel, lalu tunggu status domain menjadi valid.
 
-Sama seperti Laravel, tapi:
-- **Root Directory** = `docs/react`
-- Custom domain = `react-docs.example.com`
+Ulangi proses untuk kelima situs. Satu domain atau subdomain dapat diarahkan ke project yang sesuai. Domain tidak ditentukan oleh folder Git atau `vercel.json`; pengaitannya dilakukan di **Settings → Domains** pada masing-masing Vercel Project.
 
-### Daftar Domain yang Disarankan
-
-| Project        | Root Directory   | Domain                            |
-| -------------- | ---------------- | --------------------------------- |
-| Laravel Docs   | `docs/laravel`   | `laravel-docs.example.com`        |
-| React Docs     | `docs/react`     | `react-docs.example.com`          |
-| Vue Docs       | `docs/vue`       | `vue-docs.example.com`            |
-| Next.js Docs   | `docs/next`      | `next-docs.example.com`           |
+Setelah domain final ditentukan, tambahkan `sitemap.hostname` dengan URL domain sebenarnya ke `.vitepress/config.mjs` masing-masing situs bila Anda ingin menerbitkan sitemap. Jangan gunakan domain contoh untuk sitemap produksi.
 
 ## 🏗️ Cara Tambah Docs Site Baru (misal: React)
 
