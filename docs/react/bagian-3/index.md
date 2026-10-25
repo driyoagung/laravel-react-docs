@@ -18,7 +18,7 @@ title: Bagian III — Pola Desain Komponen
 
 ::: tip 💡 Kapan Pakai Pola Ini?
 Pola Compound & Render Props udah mulai jarang dipakai di project React
-modern — hook lebih简洁. Tapi memahami pola ini penting untuk baca codebase
+modern — hook lebih ringkas. Tapi memahami pola ini penting untuk baca codebase
 lama atau library pihak ketiga. HOC & React.memo masih relevan. Error Boundary
 adalah **WAJIB** untuk production.
 :::

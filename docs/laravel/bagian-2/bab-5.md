@@ -219,13 +219,13 @@ Cache::put('key', 'value', 60);
 $value = Cache::get('key');
 
 // Via Helper
-cache('key', 'value', 60);
+cache(['key' => 'value'], 60);
 $value = cache('key');
 ```
 
 **Penjelasan:**
 
-- `cache('key', 'value')` adalah helper function, sama dengan `Cache::put('key', 'value')`.
+- `cache(['key' => 'value'], 60)` adalah helper function, sama dengan `Cache::put('key', 'value', 60)`.
 - Lebih ringkas, tapi kurang eksplisit.
 - Helper function biasanya untuk penggunaan sekali, Facade untuk chain (seperti `Cache::tags()->remember()`).
 

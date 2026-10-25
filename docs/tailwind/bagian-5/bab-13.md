@@ -123,7 +123,7 @@ Teks placeholder:  text-gray-400     ↔  dark:text-gray-500
 - **Semantic naming** — Pakai `surface`, `text-primary`, `border` (bukan warna) di design system. Lalu map ke warna di light/dark mode.
 
 ::: tip 💡 Tailwind v4 Dark Mode
-Tailwind v4 (akan datang 2026) menggunakan sintaks `dark:` yang sama. Tidak ada perubahan kode untuk dark mode.
+Tailwind v4 (rilis Januari 2025) menggunakan sintaks `dark:` yang sama. Perbedaannya hanya di konfigurasi: di v4, mode `class` diaktifkan via CSS `@custom-variant dark (&:where(.dark, .dark *));` — bukan `darkMode: 'class'` di config JS. Konsep toggle-nya tidak berubah.
 :::
 
 ## 📌 Ringkasan Bab 13

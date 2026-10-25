@@ -122,7 +122,7 @@ Hanya gunakan `{!! !!}` untuk HTML yang sudah Anda percaya 100% aman.
 
 **Penjelasan halaman anak:**
 
-- **`@extends('layouts.app')`** — Wariskan layout `app.blade.php`. Wajib声明 dulu sebelum section.
+- **`@extends('layouts.app')`** — Wariskan layout `app.blade.php`. Wajib dideklarasikan dulu sebelum section.
 - **`@section('title', 'Daftar Produk')`** — Inject title ke `@yield('title')` di layout.
 - **`@section('content') ... @endsection`** — Inject konten utama ke `@yield('content')` di layout.
 - **`@include('products._card', ['product' => $product])`** — Include partial view per item. Underscore prefix `_card` adalah konvensi = partial.

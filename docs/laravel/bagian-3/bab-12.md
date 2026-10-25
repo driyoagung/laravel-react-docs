@@ -212,7 +212,7 @@ it('validates product data', function () {
 
 **Penjelasan RefreshDatabase:**
 
-- **`uses(RefreshDatabase::class)`** — Pest helper. Setiap test dijalankan, DB di-migrate ulang.
+- **`uses(RefreshDatabase::class)`** — Pest helper. Migrasi dijalankan sekali, lalu setiap test dibungkus transaksi dan di-rollback saat selesai.
 - **`Category::factory()->create()`** — Setup data untuk test.
 - **`$this->post('/products', [...])`** — Simulasi POST request.
 - **`$response->assertRedirect('/products')`** — Assert response melakukan redirect.
@@ -222,7 +222,7 @@ it('validates product data', function () {
 ### Trait Testing Penting
 
 ```php
-// 1. RefreshDatabase — migrate ulang setiap test
+// 1. RefreshDatabase — migrate sekali, tiap test di-wrap transaksi (paling umum)
 use Illuminate\Foundation\Testing\RefreshDatabase;
 uses(RefreshDatabase::class);
 
@@ -237,7 +237,7 @@ uses(DatabaseTruncation::class);
 
 **Penjelasan trait testing:**
 
-- **`RefreshDatabase`** — Transaction-based. Setiap test rollback setelah selesai. Cepat.
+- **`RefreshDatabase`** — Migrasi sekali saat pertama kali, lalu setiap test dibungkus transaksi dan di-rollback setelah selesai. Cepat.
 - **`DatabaseMigrations`** — `migrate:fresh` tiap test. Lebih lambat, lebih clean.
 - **`DatabaseTruncation`** — Truncate tables (bukan rollback). Untuk testing dengan FK kompleks.
 

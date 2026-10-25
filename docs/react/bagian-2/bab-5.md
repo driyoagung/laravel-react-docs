@@ -113,7 +113,7 @@ function ListingDetail({ listingId }) {
 - **`useEffect(() => {...}, [deps])`** — Jalankan efek setelah render.
 - **Callback** — Logic side effect (fetch, subscribe, dll).
 - **Dependency array** — Kapan efek dijalankan ulang.
-- **`isCancelled` flag** — Cegah "setState on unmounted component" warning.
+- **`isCancelled` flag** — Cegah state update pada komponen yang sudah unmount (mencegah race condition. Sejak React 18 warning "setState on unmounted component" sudah dihapus, tapi pola ini tetap best practice).
 - **Cleanup function** — Return dari callback. Dipanggil saat unmount atau sebelum efek berikutnya.
 
 ## 5.3 🎯 Variasi Dependency Array `useEffect`

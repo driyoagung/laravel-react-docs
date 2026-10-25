@@ -28,7 +28,7 @@ $value = Cache::get('key', 'default');
 Cache::forget('products.top.10');
 Cache::flush(); // Hapus SEMUA cache
 
-// Simpan永久 (forever)
+// Simpan permanen (forever)
 Cache::forever('settings', Setting::pluck('value', 'key')->toArray());
 ```
 
@@ -40,7 +40,7 @@ Cache::forever('settings', Setting::pluck('value', 'key')->toArray());
 - **`Cache::get('key', 'default')`** — Ambil atau return default.
 - **`Cache::forget()`** — Hapus 1 cache key.
 - **`Cache::flush()`** — Hapus SEMUA cache. **Hati-hati** — hapus cache untuk semua user.
-- **`Cache::forever()`** — Simpan永久 (5 tahun). Untuk data yang jarang berubah.
+- **`Cache::forever()`** — Simpan permanen (tanpa TTL). Untuk data yang jarang berubah.
 
 ## 23.2 🏷️ Cache dengan Tags (Redis/Memcached)
 
@@ -64,7 +64,7 @@ Cache tags hanya didukung di Redis dan Memcached. Untuk `database` atau `file` d
 ## 23.3 🔄 Cache Pattern: Remember Forever
 
 ```php
-// Pattern: ambil cache, kalau tidak ada generate & simpan永久
+// Pattern: ambil cache, kalau tidak ada generate & simpan permanen
 $settings = Cache::rememberForever('site.settings', function () {
     return Setting::pluck('value', 'key')->toArray();
 });
@@ -157,9 +157,16 @@ Product::chunk(500, function ($products) {
     }
 });
 
-// Atau dengan lazy chunk
-Product::lazyChunk(500, function ($product) {
+// Atau dengan lazy (LazyCollection) — paling hemat memory
+Product::lazy(500)->each(function ($product) {
     // proses
+});
+
+// Atau chunkById — lebih aman jika data berubah saat iterasi
+Product::chunkById(500, function ($products) {
+    foreach ($products as $product) {
+        // proses
+    }
 });
 
 // Untuk update massal yang lebih cepat
@@ -170,7 +177,8 @@ Product::where('is_active', false)->update(['is_active' => true]);
 **Penjelasan chunk:**
 
 - **`chunk(500, closure)`** — Ambil data 500 per batch. Hemat memory.
-- **`lazyChunk()`** — Versi lazy (hemat lebih banyak memory).
+- **`lazy(500)->each(...)`** — Versi lazy via LazyCollection — paling hemat memory.
+- **`chunkById(500, closure)`** — Mirip `chunk()`, tapi paginasi berdasarkan ID — lebih aman jika data berubah saat iterasi.
 - **Bulk update** — 1 query untuk update banyak row.
 
 ## 23.7 📊 Database Indexing
@@ -214,7 +222,7 @@ php artisan event:cache
 APP_DEBUG=false
 APP_ENV=production
 LOG_LEVEL=error
-CACHE_DRIVER=redis
+CACHE_STORE=redis
 SESSION_DRIVER=redis
 QUEUE_CONNECTION=redis
 ```
@@ -225,7 +233,7 @@ QUEUE_CONNECTION=redis
 - **`route:cache`** — Compile semua route ke 1 file.
 - **`view:cache`** — Compile Blade template ke PHP murni.
 - **`composer install --optimize-autoloader`** — Optimalkan autoload class.
-- **`CACHE_DRIVER=redis`** — Pakai Redis (in-memory) bukan file/database.
+- **`CACHE_STORE=redis`** — Pakai Redis (in-memory) bukan file/database. (Sejak Laravel 11, env key-nya `CACHE_STORE`, bukan `CACHE_DRIVER`.)
 
 ## 23.9 📈 Monitoring Tools
 

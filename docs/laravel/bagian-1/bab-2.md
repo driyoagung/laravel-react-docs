@@ -259,7 +259,7 @@ Gunakan `php artisan make:model Product -a` untuk generate **semua** file terkai
 - **Blade Formatter** — Auto-format file `.blade.php` saat save (pakai ekstensi Blade Formatter dari `shufo.vscode-blade-formatter`).
 - **DotENV** — Highlight syntax untuk file `.env`, agar tidak salah edit.
 - **Thunder Client** — Seperti Postman tapi di dalam VS Code. Test endpoint API tanpa switch window.
-- **GitLens** — Lihat git blame, history, diff per baris. Sangat membantu团队.
+- **GitLens** — Lihat git blame, history, diff per baris. Sangat membantu tim.
 
 ## 📌 Ringkasan Bab 2
 

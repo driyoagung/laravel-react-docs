@@ -67,7 +67,7 @@ return (
 
 - **① Single root** — JSX harus dibungkus satu elemen. `Fragment` (`<>...</>`) tanpa extra DOM.
 - **② camelCase** — Karena JSX = JavaScript, `class` reserved word → `className`. `for` reserved → `htmlFor`.
-- **③ Self-closing** — Semua tag harus ditutup. HTML5 kadang izinkan省略, JSX tidak.
+- **③ Self-closing** — Semua tag harus ditutup. HTML5 kadang mengizinkan tag tidak ditutup, JSX tidak.
 - **④ `{}` untuk JS** — Ekspresi JS dalam kurung kurawal. String perlu quote: `{"halo"}`.
 - **⑤ Style as object** — Property CSS jadi camelCase di object (`fontSize` bukan `font-size`).
 

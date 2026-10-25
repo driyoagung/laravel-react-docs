@@ -163,10 +163,10 @@ REACT ECOSYSTEM
 5. **Commit/patching** — Hanya update node DOM yang **berubah**. Misal `className` berubah → update attribute itu saja, BUKAN replace seluruh node.
 6. **Browser updated** — User lihat perubahan.
 
-> 💡 **React 19: Automatic Batching**
-> React 19 secara otomatis menggabungkan banyak `setState` dalam satu
-> re-render — bahkan di dalam `setTimeout`, `Promise`, dan event handler.
-> Ini membuat aplikasi lebih efisien tanpa kode tambahan.
+> 💡 **React 18: Automatic Batching**
+> Sejak React 18, React secara otomatis menggabungkan banyak `setState`
+> dalam satu re-render — bahkan di dalam `setTimeout`, `Promise`, dan
+> event handler. Ini membuat aplikasi lebih efisien tanpa kode tambahan.
 
 ## 📌 Ringkasan Bab 1
 

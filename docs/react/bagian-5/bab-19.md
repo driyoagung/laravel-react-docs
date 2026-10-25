@@ -34,7 +34,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime:   1000 * 60 * 5, // Data dianggap fresh selama 5 menit
-      cacheTime:   1000 * 60 * 10, // Cache disimpan 10 menit
+      gcTime:     1000 * 60 * 10, // Cache disimpan 10 menit setelah inaktif
       retry:       2,              // Coba ulang 2x jika gagal
       refetchOnWindowFocus: false, // Jangan refetch saat tab kembali fokus
     },
@@ -53,7 +53,7 @@ root.render(
 
 - **`QueryClient`** — Holder untuk cache + config.
 - **`staleTime`** — Selama ini, data dianggap fresh. Tidak refetch.
-- **`cacheTime`** — Berapa lama cache disimpan setelah inaktif.
+- **`gcTime`** — Berapa lama cache disimpan setelah inaktif. (Di TanStack Query v4 opsi ini bernama `cacheTime` — diganti `gcTime` sejak v5.)
 - **`retry`** — Auto retry on failure.
 - **`ReactQueryDevtools`** — Browser DevTools untuk debug.
 

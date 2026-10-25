@@ -110,7 +110,7 @@ public function up(): void
 - **`->after('name')`** — Taruh kolom baru setelah kolom `name`.
 - **`->index('category_id')`** — Tambah index untuk mempercepat query.
 - **`->dropColumn('old_field')`** — Hapus kolom (hati-hati, data hilang!).
-- **`->renameColumn()`** — Rename kolom. Butuh package `doctrine/dbal` di Laravel < 10.
+- **`->renameColumn()`** — Rename kolom. Butuh package `doctrine/dbal` di Laravel ≤ 10. Sejak Laravel 11, sudah native tanpa package tambahan.
 
 ## 10.2 📦 Eloquent Model — Representasi Tabel
 
