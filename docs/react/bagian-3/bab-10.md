@@ -140,7 +140,7 @@ Modal.Body = function ModalBody({ children }) {
 | Compound Components    | Grup komponen yang bekerja bersama, share state via Context    |
 | Render Props           | Prop yang berisi fungsi untuk render UI yang fleksibel        |
 | Kapan pakai            | Library dengan API fleksibel (Modal, Dropdown, Card)           |
-| Modern alternative     | Custom hooks lebih简洁 untuk kebanyakan kasus                 |
+| Modern alternative     | Custom hooks lebih ringkas untuk kebanyakan kasus                 |
 
 ---
 

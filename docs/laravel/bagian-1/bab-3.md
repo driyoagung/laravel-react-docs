@@ -90,7 +90,7 @@ Response HTML ke Browser
 
 **Penjelasan tanggung jawab:**
 
-- **Controller** — Hanya充当 koordinator. Tugasnya: parsing input, validasi sederhana, panggil Model/Service, return response.
+- **Controller** — Hanya berperan sebagai koordinator. Tugasnya: parsing input, validasi sederhana, panggil Model/Service, return response.
 - **Model** — Class yang Mewakili tabel database. Punya method seperti `find()`, `where()`, `create()`, relasi, scope. Tapi TIDAK BOLEH return HTTP response atau baca `$_GET`.
 - **View** — Template Blade. Fungsi tunggal: render HTML. Tidak boleh ada query database atau business logic.
 
@@ -165,7 +165,7 @@ class ProductController extends Controller
 
 **Penjelasan kode Service Layer:**
 
-- **`ProductService`** — Class terpisah yang封装 business logic tentang produk. Misal: `getActiveProducts()` tidak hanya query, tapi sudah terapkan scope `active()` dan `inStock()`.
+- **`ProductService`** — Class terpisah yang mengenkapsulasi business logic tentang produk. Misal: `getActiveProducts()` tidak hanya query, tapi sudah terapkan scope `active()` dan `inStock()`.
 - **`ProductController`** — Menerima `ProductService` via constructor injection (DI). Tinggal panggil method, return view.
 - Keuntungan:
   - **Testable** — Test `ProductService` tanpa harus bikin HTTP request.

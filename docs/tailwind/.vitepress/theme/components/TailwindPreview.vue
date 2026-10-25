@@ -8,18 +8,95 @@
         </svg>
         <span>Preview Hasil</span>
       </div>
-      <div class="tailwind-preview-content" v-html="code"></div>
+      <iframe
+        class="tailwind-preview-frame"
+        :srcdoc="srcDoc"
+        :style="{ height: height + 'px' }"
+        title="Preview Hasil"
+        loading="lazy"
+        scrolling="no"
+      ></iframe>
     </div>
   </div>
 </template>
 
 <script setup>
-defineProps({
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useData } from 'vitepress'
+
+const props = defineProps({
   code: {
     type: String,
     required: true,
   },
 })
+
+const { isDark } = useData()
+const height = ref(88)
+
+// Preview dirender di dalam iframe dengan Tailwind Play CDN.
+// Ini memberikan isolasi style total: utility Tailwind tidak bisa
+// ditimpa style VitePress (.vp-doc p, h2, table, dst), semua utility
+// termasuk arbitrary values didukung, dan inline onclick berfungsi.
+const srcDoc = computed(() => {
+  const darkClass = isDark.value ? ' class="dark"' : ''
+  return `<!DOCTYPE html>
+<html${darkClass}>
+<head>
+<meta charset="utf-8">
+<script src="https://cdn.tailwindcss.com"><\/script>
+<script>tailwind.config = { darkMode: 'class' }<\/script>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    padding: 24px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background: #ffffff;
+    color: #111827;
+  }
+  html.dark body { background: #0f172a; color: #e5e7eb; }
+</style>
+</head>
+<body>
+${props.code}
+<script>
+(function () {
+  var post = function () {
+    parent.postMessage(
+      { type: 'tw-preview-height', height: Math.ceil(document.documentElement.getBoundingClientRect().height) },
+      '*'
+    )
+  }
+  window.addEventListener('load', function () {
+    post()
+    if (window.ResizeObserver) {
+      new ResizeObserver(post).observe(document.documentElement)
+    }
+  })
+  // Interaktivitas dasar untuk demo modal: klik tombol/overlay menutup modal.
+  document.addEventListener('click', function (e) {
+    var modal = e.target.closest('.fixed.inset-0')
+    if (!modal) return
+    var isButton = e.target.closest('button')
+    var isOverlay = e.target === modal
+    if (isButton || isOverlay) modal.style.display = 'none'
+  })
+})()
+<\/script>
+</body>
+</html>`
+})
+
+function onMessage(e) {
+  if (e.data && e.data.type === 'tw-preview-height') {
+    height.value = Math.max(88, e.data.height)
+  }
+}
+
+onMounted(() => window.addEventListener('message', onMessage))
+onUnmounted(() => window.removeEventListener('message', onMessage))
 </script>
 
 <style scoped>
@@ -32,7 +109,6 @@ defineProps({
   border-radius: 0.5rem;
   border: 1px solid #e5e7eb;
   overflow: hidden;
-  isolation: isolate;
 }
 .dark .tailwind-preview {
   border-color: #374151;
@@ -50,7 +126,6 @@ defineProps({
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #4b5563;
-  font-family: "Inter", system-ui, sans-serif;
 }
 .dark .tailwind-preview-label {
   background-color: #1f2937;
@@ -58,73 +133,13 @@ defineProps({
   color: #9ca3af;
 }
 
-.tailwind-preview-content {
-  padding: 1.5rem;
-  min-height: 60px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  background-color: #fafafa;
-  color: #111827;
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 1rem;
-  line-height: 1.5;
-  position: relative;
-  /* Reset parent styles - critical untuk Tailwind utilities bisa override VitePress */
-  isolation: isolate;
+.tailwind-preview-frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: #ffffff;
 }
-.dark .tailwind-preview-content {
-  background-color: #0f172a;
-  color: #e5e7eb;
-}
-
-/* Apply Tailwind-like reset untuk children di preview */
-.tailwind-preview-content :deep(*) {
-  font-family: inherit;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  border: 0 solid #e5e7eb;
-}
-
-.tailwind-preview-content :deep(button) {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: 1.5;
-  cursor: pointer;
-  background-color: transparent;
-  background-image: none;
-  -webkit-appearance: button;
-}
-
-.tailwind-preview-content :deep(p) {
-  margin: 0;
-  line-height: 1.5;
-}
-
-.tailwind-preview-content :deep(h1),
-.tailwind-preview-content :deep(h2),
-.tailwind-preview-content :deep(h3),
-.tailwind-preview-content :deep(h4) {
-  margin: 0;
-  font-weight: 600;
-}
-
-.tailwind-preview-content :deep(code) {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.875em;
-}
-
-.tailwind-preview-content :deep(ul),
-.tailwind-preview-content :deep(ol) {
-  margin: 0;
-  padding-left: 1.5rem;
-}
-
-.tailwind-preview-content :deep(input) {
-  font-family: inherit;
-  font-size: inherit;
+.dark .tailwind-preview-frame {
+  background: #0f172a;
 }
 </style>

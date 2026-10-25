@@ -40,8 +40,8 @@ npm install @tanstack/react-query @tanstack/react-query-devtools
 npm install react-hook-form @hookform/resolvers zod
 npm install axios
 
-# UI & styling
-npm install -D tailwindcss autoprefixer
+# UI & styling (pin v3 — Tailwind v4 tidak punya perintah `init`)
+npm install -D tailwindcss@3 postcss autoprefixer
 npx tailwindcss init -p
 
 # Feature-specific

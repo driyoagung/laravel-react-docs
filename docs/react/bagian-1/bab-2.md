@@ -17,7 +17,7 @@ npm install
 # Install dependency utama untuk project ini
 npm install react-router-dom axios @reduxjs/toolkit react-redux
 npm install @tanstack/react-query
-npm install -D tailwindcss autoprefixer
+npm install -D tailwindcss@3 postcss autoprefixer
 npx tailwindcss init -p
 
 # Jalankan dev server
@@ -31,7 +31,7 @@ npm run dev
 - **`cd <name> && npm install`** — Masuk folder & install dependency dari `package.json`.
 - **`npm install <packages>`** — Tambah library. `react-router-dom` untuk routing, `axios` untuk HTTP, `@reduxjs/toolkit` untuk state, `@tanstack/react-query` untuk server state.
 - **`-D`** — Dev dependency. Hanya untuk build/testing, tidak untuk production.
-- **`npx tailwindcss init -p`** — Generate `tailwind.config.js` & `postcss.config.js`.
+- **`npx tailwindcss init -p`** — Generate `tailwind.config.js` & `postcss.config.js`. Kita pin ke `tailwindcss@3` karena Tailwind v4 sudah tidak punya perintah `init` (setup-nya via plugin `@tailwindcss/vite`) — tanpa pin, pembaca yang install hari ini akan mendapat v4 dan instruksi ini gagal.
 
 > 💡 **Mengapa Vite, bukan Create React App?**
 > Create React App (CRA) sudah **deprecated** oleh tim React. Vite adalah

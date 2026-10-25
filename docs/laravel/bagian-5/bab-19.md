@@ -43,6 +43,10 @@ class User extends Authenticatable
 - **`$hidden`** — Field yang tidak ikut diserialize ke JSON (untuk keamanan).
 - **`$casts`** — Auto-cast tipe data. `email_verified_at` jadi Carbon instance.
 
+::: warning ⚠️ Hati-hati: Mass-Assignment
+Menaruh `role` di `$fillable` berbahaya jika field ini bisa dikirim dari endpoint publik (register/update) — user bisa eskalasi role-nya sendiri (*privilege escalation*). Di production, isi `$fillable` seminimal mungkin dan assign `role` hanya lewat logic yang terproteksi (misalnya oleh admin), bukan lewat mass assignment.
+:::
+
 ## 19.3 🎮 Auth Controller
 
 ```php

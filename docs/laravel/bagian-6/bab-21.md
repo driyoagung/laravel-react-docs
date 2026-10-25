@@ -131,9 +131,10 @@ QUEUE_CONNECTION=database  # Bisa: sync, database, redis, sqs, beanstalkd
 ### Database Queue (Paling Simpel)
 
 ```bash
-# Generate migration untuk tabel jobs
-php artisan queue:table
+# Laravel 11+: migration tabel jobs SUDAH bawaan — langsung migrate saja
 php artisan migrate
+
+# (Laravel 10 ke bawah: generate dulu dengan `php artisan queue:table`)
 ```
 
 ### Redis Queue (Recommended untuk Production)

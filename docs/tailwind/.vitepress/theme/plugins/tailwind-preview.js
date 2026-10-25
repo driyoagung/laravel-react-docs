@@ -43,10 +43,13 @@ export default function tailwindPreviewPlugin(md) {
     }
 
     // Hanya tambahkan preview untuk block dengan bahasa HTML / XML
-    // (atau block tanpa info — anggap html default)
+    // (atau block tanpa info — anggap html default).
+    // `html-*` mencakup alias seperti `html-tailwind`.
     const isHtmlLike =
       !lang ||
-      ['html', 'xml', 'svg', 'vue', 'jsx', 'tsx'].includes(lang)
+      lang === 'html' ||
+      lang.startsWith('html-') ||
+      ['xml', 'svg', 'vue', 'jsx', 'tsx'].includes(lang)
 
     if (!isHtmlLike) {
       return defaultFence
@@ -67,19 +70,12 @@ export default function tailwindPreviewPlugin(md) {
       return codeHtml
     }
 
-    // Bungkus code + preview dalam container
-    // Preview menggunakan v-html di komponen Vue untuk render HTML
-    const previewId = `tw-preview-${idx}-${Math.random().toString(36).slice(2, 8)}`
-
     // Escape untuk attribute value di HTML element
-    // Ganti " dengan &quot; dan < dengan &lt; agar tidak bentrok dengan parsing
     const escapedCode = rawCode
       .replace(/&/g, '&amp;')
       .replace(/"/g, '&quot;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
-      // Tag <br>, <input>, <img>, <hr> adalah self-closing
-      // Tidak perlu di-escape karena akan di-render via v-html
 
     return `
       ${codeHtml}

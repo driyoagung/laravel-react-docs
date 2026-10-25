@@ -97,5 +97,5 @@ Total: 7 Bagian | 17 Bab | Pemula → Profesional
 :::
 
 ::: warning ⚠️ Disclaimer
-Ebook ini menggunakan **Tailwind CSS v3** (2026 standard). Beberapa class mungkin berbeda di v4 (akan datang). Selalu cek dokumentasi resmi untuk update terbaru.
+Ebook ini menggunakan **Tailwind CSS v3**. Tailwind v4 sudah rilis (Januari 2025) dengan setup berbeda (via plugin `@tailwindcss/vite`, tanpa perintah `init`) — namun konsep utility, prefix, dan mayoritas class di ebook ini tetap relevan di v4. Selalu cek dokumentasi resmi untuk update terbaru.
 :::
