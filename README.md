@@ -158,6 +158,8 @@ Untuk **setiap baris** tabel:
 
 Ulangi proses untuk kelima situs. Satu domain atau subdomain dapat diarahkan ke project yang sesuai. Domain tidak ditentukan oleh folder Git atau `vercel.json`; pengaitannya dilakukan di **Settings → Domains** pada masing-masing Vercel Project.
 
+Jika build Vercel menampilkan `vitepress: command not found`, pastikan commit yang di-deploy sudah memuat `vitepress` pada `devDependencies` di `package.json` folder docs yang dipilih. Periksa juga bahwa Install Command tidak menggunakan `--omit=dev` atau `NODE_ENV=production`, karena VitePress diperlukan saat build.
+
 Setelah domain final ditentukan, tambahkan `sitemap.hostname` dengan URL domain sebenarnya ke `.vitepress/config.mjs` masing-masing situs bila Anda ingin menerbitkan sitemap. Jangan gunakan domain contoh untuk sitemap produksi.
 
 ## 🏗️ Cara Tambah Docs Site Baru (misal: React)
